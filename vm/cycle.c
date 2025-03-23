@@ -58,7 +58,10 @@ shift (x, st, s)
     case LSR:
       return (x >> (uint32_t)s);
     case ASR:
-      return (*(uint32_t *)&((int32_t)x >> (int32_t)s));
+      {
+	int32_t xs = (int32_t)x >> s;
+	return (*(uint32_t *)&xs);
+      }
     }
 
   return x;
