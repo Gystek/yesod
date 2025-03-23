@@ -9,6 +9,7 @@
 
 # define PC (14)
 # define SP (15)
+
 struct yesod_vm {
   /* register x0 holds the 0 value at all times */
   /* pc in x14 and sp in x15 */
@@ -38,7 +39,9 @@ struct yesod_vm {
 # define FLAG_SIGN  (0b00000100)
 # define FLAG_OVER  (0b00001000)
 
-int yesod_init_vm (struct yesod_vm *, uint32_t, uint32_t);
-int yesod_init_prog (struct yesod_vm *, FILE *);
+int	yesod_init_vm (struct yesod_vm *, uint32_t, uint32_t);
+int	yesod_init_prog (struct yesod_vm *, FILE *);
+void	yesod_dump_vm (struct yesod_vm *);
+void	yesod_destroy_vm (struct yesod_vm *);
 
 #endif /* YESOD_VM_ */

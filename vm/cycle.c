@@ -264,7 +264,7 @@ cycle1 (vm, instr)
     case NOP:
       return 0;
     case HLT:
-      return src;
+      return 1;
     case MOV:
       mov (vm, instr.rd, src);
       return 0;

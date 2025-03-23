@@ -19,8 +19,8 @@ yesod_init_vm (vm, mem, stack)
   vm->memory = memory;
   vm->flags = 0;
 
-  printf ("yesod: initialised VM with %u bytes of memory (%u bytes stack)\n",
-	  mem, stack);
+  printf ("yesod: initialised VM with %u bytes of memory (%u bytes (%u words) stack)\n",
+	  mem, stack, stack / 4);
 
   return 0;
 }
@@ -185,4 +185,25 @@ yesod_init_prog (vm, f)
     vm->regs[SP] = 0;
 
     return 0;
+}
+
+void
+yesod_dump_vm (vm)
+     struct yesod_vm *vm;
+{
+  int i;
+
+  for (i = 0; i < 16; i++)
+    {
+      printf ("  x%d\t%#010x (%u)\n", i, vm->regs[i], vm->regs[i]);
+    }
+
+  printf ("  flags\t%x\n", vm->flags);
+}
+
+void
+yesod_destroy_vm (vm)
+     struct yesod_vm *vm;
+{
+  free (vm->memory.memory);
 }
