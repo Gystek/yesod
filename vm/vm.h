@@ -5,25 +5,14 @@
 # include <stdio.h>
 # include "mem.h"
 
-static uint8_t YESOD_VERSION = 0;
+#define YESOD_VERSION (0)
 
+# define PC (14)
+# define SP (15)
 struct yesod_vm {
-  uint32_t		x0;
-  uint32_t		x1;
-  uint32_t		x2;
-  uint32_t		x3;
-  uint32_t		x4;
-  uint32_t		x5;
-  uint32_t		x6;
-  uint32_t		x7;
-  uint32_t		x8;
-  uint32_t		x9;
-  uint32_t		x10;
-  uint32_t		x11;
-  uint32_t		x12;
-  uint32_t		x13;
-  uint32_t		pc; /* x14 */
-  uint32_t		sp; /* x15 */
+  /* register x0 holds the 0 value at all times */
+  /* pc in x14 and sp in x15 */
+  uint32_t		regs[16];
 
   struct yesod_mem	memory;
 
@@ -32,7 +21,22 @@ struct yesod_vm {
   uint32_t	rodata;
   uint32_t	data;
   uint32_t	text;
+
+  /* flags */
+  /*
+   * 0 - nil
+   * 1 - carry
+   * 2 - sign
+   * 3 - overflow
+   * 4..7 - reserved
+   */
+  uint8_t	flags;
 };
+
+# define FLAG_NIL   (0b00000001)
+# define FLAG_CARRY (0b00000010)
+# define FLAG_SIGN  (0b00000100)
+# define FLAG_OVER  (0b00001000)
 
 int yesod_init_vm (struct yesod_vm *, uint32_t, uint32_t);
 int yesod_init_prog (struct yesod_vm *, FILE *);

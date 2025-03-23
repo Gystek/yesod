@@ -6,7 +6,7 @@
 struct yesod_mem {
   uint32_t	m_size;
   uint32_t	s_size;
-  void		*memory;
+  uint8_t	*memory;
 };
 
 #endif /* YESOD_MEM_ */

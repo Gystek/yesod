@@ -17,6 +17,7 @@ yesod_init_vm (vm, mem, stack)
     return 1;
 
   vm->memory = memory;
+  vm->flags = 0;
 
   printf ("yesod: initialised VM with %u bytes of memory (%u bytes stack)\n",
 	  mem, stack);
@@ -180,8 +181,8 @@ yesod_init_prog (vm, f)
     printf ("  .rodata\t%#010x\n", vm->rodata);
     printf ("  .text\t%#010x\n", vm->text);
 
-    vm->pc = vm->text;
-    vm->sp = 0;
+    vm->regs[PC] = vm->text;
+    vm->regs[SP] = 0;
 
     return 0;
 }
