@@ -8,11 +8,11 @@ Roadmap
 -------
 
 - [ ] Architecture design
-  - [ ] ISA
+  - [x] ISA
   - [ ] Caching
   - [ ] Pipeline
   - [ ] Memory map
-  - [ ] Executable format
+  - [x] Executable format
   - [ ] ABI
 - [ ] Assembler
 - [ ] Language design
